@@ -1,0 +1,18 @@
+nav {
+    position: sticky;
+    padding: 1rem 2rem;
+    background-color: black;
+    color: white;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+section {
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
