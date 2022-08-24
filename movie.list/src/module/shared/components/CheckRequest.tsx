@@ -12,7 +12,7 @@ export const CheckRequest = ({ isLoading, isError, refetch, children }: Props): 
     if (isLoading) {
         return (
             <div className='all-screen'>
-                <h2>Loaging...</h2>
+                <h2>Loading...</h2>
             </div>
         )
     } else if (isError){

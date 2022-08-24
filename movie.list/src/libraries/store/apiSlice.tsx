@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { PopularMoviesList } from '../movies/types'
+import { Movie, PopularMoviesList } from '../movies/types'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -12,8 +12,16 @@ export const apiSlice = createApi({
                     api_key: process.env.REACT_APP_API_KEY
                 }
             })
+        }),
+        getMovie: builder.query<Movie, string>({
+            query: (id) => ({
+                url: `movie/${id}`,
+                params: {
+                    api_key: process.env.REACT_APP_API_KEY
+                }
+            })
         })
     })
 })
 
-export const { useGetPopularMoviesQuery } = apiSlice
+export const { useGetPopularMoviesQuery, useGetMovieQuery } = apiSlice
