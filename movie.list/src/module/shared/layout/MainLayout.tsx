@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Link } from "react-router-dom"
 import './MainLayout.scss'
 
 interface Props {
@@ -11,10 +12,10 @@ export const MainLayout = ({ children }: Props): JSX.Element => {
             <nav>
                 <div className='nav-container'>
                     <div>
-                        Kroalca
+                        <Link to="/movie">Kroalca</Link>
                     </div>
                     <div>
-                        User
+                        <Link to="/login">Login</Link>
                     </div>
                 </div>
             </nav>

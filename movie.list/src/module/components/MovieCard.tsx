@@ -4,22 +4,22 @@ import { getUrlImg } from "../shared/utils"
 import './MovieCard.scss'
 
 interface Props {
-    discover: PopularMovies
+    movie: PopularMovies
 }
 
-export const MovieCard = ({ discover }: Props): JSX.Element => {
+export const MovieCard = ({ movie }: Props): JSX.Element => {
     const navidate = useNavigate()
 
     const handleNavigateMovie = () => {
-        navidate(`/movie/${discover.id}`)
+        navidate(`/movie/${movie.id}`)
     }
 
     return (
         <div className="movie-card" onClick={handleNavigateMovie}>
-            <img src={getUrlImg(discover.poster_path)} alt={discover.title} />
+            <img src={getUrlImg(movie.poster_path)} alt={movie.title} />
             <div className="movie-info">
-                <span className="title">{discover.title}</span>
-                <span className="subtitle">{discover.release_date}</span>
+                <span className="title">{movie.title}</span>
+                <span className="subtitle">{movie.release_date}</span>
             </div>
         </div>
     )

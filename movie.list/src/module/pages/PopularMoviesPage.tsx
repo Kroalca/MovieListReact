@@ -16,7 +16,7 @@ const PopularMovies = ({ movies, isLoading, isError, refetch }: Props): JSX.Elem
     return (
         <CheckRequest isLoading={isLoading} isError={isError} refetch={refetch}>
             <div className="movies-list">
-                { movies?.results.map(movie => <MovieCard key={movie.id} discover={movie}/>) }
+                { movies?.results.map(movie => <MovieCard key={movie.id} movie={movie}/>) }
             </div>
         </CheckRequest>
     )
