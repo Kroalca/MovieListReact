@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { Link } from "react-router-dom"
+import { useLogin } from "../hooks/useLogin"
 import './MainLayout.scss'
 
 interface Props {
@@ -7,6 +8,9 @@ interface Props {
 }
 
 export const MainLayout = ({ children }: Props): JSX.Element => {
+    const { getUser } = useLogin()
+    const user = getUser()
+    console.log(user)
     return (
         <main>
             <nav>

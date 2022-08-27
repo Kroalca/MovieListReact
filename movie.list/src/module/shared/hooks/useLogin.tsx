@@ -1,11 +1,17 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useCreateSessionWithLoginMutation, useDeleteSessionMutation, useLazyGetAuthenticationQuery } from "../../../libraries/store/apiSlice"
+import { useAppDispatch, useAppSelector } from "../../../libraries/store/hooks"
+import { setUser } from "../../../libraries/store/slices/user"
 
 export const useLogin = () => {
     const [getAuntetication, {isLoading: isLoadingAuntetication, isError: isErrorAuntetication}] = useLazyGetAuthenticationQuery()
     const [createSessionWithLogin, {isLoading: isLoadingLogin, isError: isErrorLogin}] = useCreateSessionWithLoginMutation()
     const [deleteSession, {isLoading: isLoadingDeleteSession, isError: isErrorDeleteSession}] = useDeleteSessionMutation()
     const [token, setToken] = useState<undefined | string>(undefined)
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.user)
+    const navigate = useNavigate()
     const isLoading = isLoadingAuntetication || isLoadingLogin ||isLoadingDeleteSession
     const isError = isErrorLogin || isErrorAuntetication ||isErrorDeleteSession
 
@@ -17,6 +23,11 @@ export const useLogin = () => {
             request_token: token.request_token
         }).unwrap()
         setToken(session.request_token)
+        dispatch(setUser({
+            name: username,
+            request_token: session.request_token
+        }))
+        navigate('/')
     }
 
     const logout = async () => {
@@ -26,9 +37,14 @@ export const useLogin = () => {
         }
     }
 
+    const getUser = () => {
+        return user.user
+    }
+
     return {
         login,
         logout,
+        getUser,
         token,
         isLoading,
         isError
