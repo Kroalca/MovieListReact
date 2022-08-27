@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCreateSessionWithLoginMutation, useDeleteSessionMutation, useLazyGetAuthenticationQuery } from "../../../libraries/store/apiSlice"
 import { useAppDispatch, useAppSelector } from "../../../libraries/store/hooks"
-import { setUser } from "../../../libraries/store/slices/user"
+import { clearUser, setUser } from "../../../libraries/store/slices/user"
 
 export const useLogin = () => {
     const [getAuntetication, {isLoading: isLoadingAuntetication, isError: isErrorAuntetication}] = useLazyGetAuthenticationQuery()
@@ -10,7 +10,7 @@ export const useLogin = () => {
     const [deleteSession, {isLoading: isLoadingDeleteSession, isError: isErrorDeleteSession}] = useDeleteSessionMutation()
     const [token, setToken] = useState<undefined | string>(undefined)
     const dispatch = useAppDispatch()
-    const user = useAppSelector(state => state.user)
+    const { user } = useAppSelector(state => state.user)
     const navigate = useNavigate()
     const isLoading = isLoadingAuntetication || isLoadingLogin ||isLoadingDeleteSession
     const isError = isErrorLogin || isErrorAuntetication ||isErrorDeleteSession
@@ -31,14 +31,15 @@ export const useLogin = () => {
     }
 
     const logout = async () => {
-        if (token) {
-            await deleteSession({ session_id: token }).unwrap
+        if (user.request_token) {
+            await deleteSession({ session_id: user.request_token }).unwrap
+            dispatch(clearUser())
             setToken(undefined)
         }
     }
 
     const getUser = () => {
-        return user.user
+        return user
     }
 
     return {
