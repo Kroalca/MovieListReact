@@ -5,13 +5,15 @@ interface User {
     request_token?: string
 }
 
+const initialStateUser: Record<string, string | undefined> = {
+    request_token: undefined,
+    name: undefined
+}
+
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: {
-            request_token: undefined,
-            name: undefined
-        }
+        user: initialStateUser
     },
     reducers: {
         setUser: (state, action) => {

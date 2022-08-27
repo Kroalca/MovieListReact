@@ -8,14 +8,13 @@ interface Props {
 }
 
 export const MainLayout = ({ children }: Props): JSX.Element => {
-    const { getUser, logout } = useLogin()
-    const user = getUser()
+    const { user, logout } = useLogin()
     return (
         <main>
             <nav>
                 <div className='nav-container'>
                     <div>
-                        <Link to="/movie">Kroalca</Link>
+                        <Link to="/movie">{ user.name ? user.name : 'Guest' }</Link>
                     </div>
                     <div>
                     {user.request_token ? <button onClick={logout}>Logout</button> :<Link to="/login">Login</Link>}

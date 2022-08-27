@@ -18,3 +18,8 @@ export interface LoginInputs {
     username: string
     password: string
 }
+
+export interface RateMovie {
+    status_code: number
+    status_message: string
+}

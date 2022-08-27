@@ -43,6 +43,9 @@ return (
                 type='password' 
                 {...register("password", { required: true })}/>
         </div>
+        { (errors.password || errors.username) &&
+            <p className='error-login'>these fields are mandatory</p>
+        }
         <input className='lf--submit' type='submit' value='LOGIN' />
     </form>
 </main>

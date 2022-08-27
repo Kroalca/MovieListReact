@@ -7,3 +7,9 @@ export interface LoginPayload {
 export interface LogoutPayload {
     session_id: string
 }
+
+export interface RateMoviePayload {
+    value: number
+    movie: number
+    session_id: string
+}

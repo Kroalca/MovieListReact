@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useCreateSessionWithLoginMutation, useDeleteSessionMutation, useLazyGetAuthenticationQuery } from "../../../libraries/store/apiSlice"
 import { useAppDispatch, useAppSelector } from "../../../libraries/store/hooks"
 import { clearUser, setUser } from "../../../libraries/store/slices/user"
+import { showAlert } from "../utils"
 
 export const useLogin = () => {
     const [getAuntetication, {isLoading: isLoadingAuntetication, isError: isErrorAuntetication}] = useLazyGetAuthenticationQuery()
@@ -16,6 +17,7 @@ export const useLogin = () => {
     const isError = isErrorLogin || isErrorAuntetication ||isErrorDeleteSession
 
     const login = async (username: string, password: string) => {
+        try {
         const token = await getAuntetication().unwrap()
         const session = await createSessionWithLogin({
             username,
@@ -28,6 +30,9 @@ export const useLogin = () => {
             request_token: session.request_token
         }))
         navigate('/')
+        } catch (e) {
+            showAlert('error', 'User not found')
+        }
     }
 
     const logout = async () => {
@@ -38,14 +43,10 @@ export const useLogin = () => {
         }
     }
 
-    const getUser = () => {
-        return user
-    }
-
     return {
         login,
         logout,
-        getUser,
+        user,
         token,
         isLoading,
         isError
