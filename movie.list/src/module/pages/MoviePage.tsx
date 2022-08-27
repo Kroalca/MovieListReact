@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import { useCreateRateMovieMutation, useGetMovieQuery } from "../../libraries/store/apiSlice"
-import { MainLayout } from "../shared/layout/MainLayout"
 import { Movie as MovieType } from "../../libraries/movies/types"
 import { CheckRequest } from "../shared/components/CheckRequest"
 import { getUrlImg, showAlert } from "../shared/utils"
@@ -76,9 +75,7 @@ export const MoviePage = (): JSX.Element => {
     const { id } = useParams()
     const {data: movie, isLoading, isError, refetch} = useGetMovieQuery(id || '')
     return (
-        <MainLayout>
-            <Movie movie={movie} isLoading={isLoading} isError={isError} refetch={refetch}/>
-        </MainLayout>
+        <Movie movie={movie} isLoading={isLoading} isError={isError} refetch={refetch}/>
     )
 
 }

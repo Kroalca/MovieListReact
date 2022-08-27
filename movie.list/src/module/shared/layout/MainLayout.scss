@@ -1,5 +1,6 @@
 nav {
     position: sticky;
+    top: 0;
     padding: 1rem 2rem;
     background-color: black;
     color: white;
@@ -11,13 +12,29 @@ nav {
     justify-content: space-between;
 }
 
-section {
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-children {
     padding: 5rem 2rem;
     display: flex;
     flex-direction: column;
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
+.logout-button {
+    padding: 0.5rem 1.5rem;
+    background-color: transparent;
+    border: 2px solid #cd2525;
+    color: #cd2525;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background-color: rgba($color: #cd2525, $alpha: 0.6);
+        color: white;
+        border-color: white;
+    }
 }
